@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Identifier</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+</head>
+<body>
+
+    <div class="flex flex-col min-h-screen  justify-center items-center bg-[url('/static/assets/images/bg.jpg')] bg-cover">
+
+        <div class="flex flex-col space-y-10 justify-center shadow-xl rounded-xl max-w-2xl py-10 px-16  border-2 border-zinc-200 bg-zinc-50">
+      
+            <h2 class="text-4xl md:text-5xl font-semibold text-center px-4">&#128013; Snake Finder</h2>
+            <p class="text-gray-600 text-center text-lg">Upload an image to get started!</p>
+            <form method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {% for error in form.photo.errors %}
+                    <span class="text-red-700">{{ error }}</span>
+                {% endfor %}
+                <div class="flex justify-center items-center">
+                    <div class="">
+                        {{ form.photo(class="form-control rounded-md") }}
+                    </div>
+                    <div class="">
+                        {{ form.submit(class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800") }}
+                    </div>       
+                </div>
+            </form>
+            {% if file_url %}
+            <div class="mt-16 ">
+              <div class="flex flex-col space-y-2">
+                <div class="flex justify-center">
+                  <img src="{{ file_url }}" class="max-w-3xl rounded-lg max-h-80" alt="">  
+                </div>
+                <div class="font-light">
+                  <div class="text-3xl font-extrabold text-center"> {{snake_name.title()}} </div>
+                  
+                </div>
+                <div class="text-sm space-x-3 flex flex-row justify-center" > 
+                  <div>
+                    {{poisonous.title()}}
+                  </div> 
+                  <div>
+                    {{country}} 
+                  </div>
+                  <div>
+                    {{scientific}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-base pt-3">
+                    {{description}} 
+                  </div>
+                </div>
+
+              </div> 
+            </div>
+                          
+            {% endif %}
+        </div>
+      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+</body>
+</html>
